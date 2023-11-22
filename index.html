@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background: url('Tarot.jpg') center/cover no-repeat fixed;
+            margin: 20;
+            padding: 20;
+        }
+        html { font-size: 15px; }
+
+        .quiz {
+            width: 80vw;
+            height: 45vh;
+            position: absolute;
+            left: 50%;
+            top: 50vh;
+            padding: 10px;
+            text-align: center;
+            transform: translate(-50%, -50%);
+        }
+
+        .q, .answer {
+            font-size: 2rem;
+        }   
+
+        .q {
+            color: white;
+        }
+
+        .answer {
+            padding: 10px;
+            background: white;
+            color: black;
+            margin: 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="quiz">
+        <div id="questions">
+            <div class="q" id="q1">Câu hỏi 1: Ôn tập ngôn ngữ lập trình nào sau đây phổ biến nhất?</div>
+            <div class="answer" onclick="checkAnswer(1, 'C++')">C++</div>
+            <div class="answer" onclick="checkAnswer(1, 'Java')">Java</div>
+            <div class="answer" onclick="checkAnswer(1, 'Python')">Python</div>
+            <div class="answer" onclick="checkAnswer(1, 'JavaScript')">JavaScript</div>
+
+            <div class="q" id="q2" style="display: none;">Câu hỏi 2: JavaScript là ngôn ngữ lập trình nào?</div>
+            <div class="answer" style="display: none;" onclick="checkAnswer(2, 'Ngôn ngữ lập trình kịch bản')">Ngôn ngữ lập trình kịch bản</div>
+            <div class="answer" style="display: none;" onclick="checkAnswer(2, 'Ngôn ngữ lập trình biên dịch')">Ngôn ngữ lập trình biên dịch</div>
+            <div class="answer" style="display: none;" onclick="checkAnswer(2, 'Ngôn ngữ lập trình hợp ngữ')">Ngôn ngữ lập trình hợp ngữ</div>
+            <div class="answer" style="display: none;" onclick="checkAnswer(2, 'Ngôn ngữ lập trình máy')">Ngôn ngữ lập trình máy</div>
+
+            <div class="q" id="q3" style="display: none;">Câu hỏi 3: Ngôn ngữ lập trình Python phát triển từ ngôn ngữ nào?</div>
+            <div class="answer" style="display: none;" onclick="checkAnswer(3, 'C')">C</div>
+            <div class="answer" style="display: none;" onclick="checkAnswer(3, 'Java')">Java</div>
+            <div class="answer" style="display: none;" onclick="checkAnswer(3, 'Perl')">Perl</div>
+            <div class="answer" style="display: none;" onclick="checkAnswer(3, 'JavaScript')">JavaScript</div>
+
+            <div class="q" id="q4" style="display: none;">Câu hỏi 4: HTML là viết tắt của từ gì?</div>
+            <div class="answer" style="display: none;" onclick="checkAnswer(4, 'HyperText Markup Language')">HyperText Markup Language</div>
+            <div class="answer" style="display: none;" onclick="checkAnswer(4, 'Hyper Transfer Markup Language')">Hyper Transfer Markup Language</div>
+            <div class="answer" style="display: none;" onclick="checkAnswer(4, 'High-Level Text Markup Language')">High-Level Text Markup Language</div>
+            <div class="answer" style="display: none;" onclick="checkAnswer(4, 'Hybrid Text Markup Language')">Hybrid Text Markup Language</div>
+        </div>
+    </div>
+
+     <script>
+        var currentQuestion = 1;
+
+        function checkAnswer(questionNumber, selectedAnswer) {
+            alert("Câu hỏi " + questionNumber + ": Câu trả lời của bạn là " + selectedAnswer);
+
+            var questions = document.querySelectorAll('.q');
+            var answers = document.querySelectorAll('.answer');
+
+            var currentQuestionElement = document.getElementById('q' + currentQuestion);
+            currentQuestionElement.style.display = 'none';
+
+            var currentAnswers = document.querySelectorAll('.answer:nth-of-type(n + ' + (4 * (currentQuestion - 1) + 1) + '):nth-of-type(-n + ' + (4 * currentQuestion) + ')');
+            currentAnswers.forEach(function (el) {
+                el.style.display = 'none';
+            });
+
+            currentQuestion++;
+
+            if (currentQuestion <= questions.length) {
+                var nextQuestionElement = document.getElementById('q' + currentQuestion);
+                nextQuestionElement.style.display = 'block';
+
+                var nextAnswers = document.querySelectorAll('.answer:nth-of-type(n + ' + (4 * (currentQuestion - 1) + 1) + '):nth-of-type(-n + ' + (4 * currentQuestion) + ')');
+                nextAnswers.forEach(function (el) {
+                    el.style.display = 'block';
+                });
+            } else {
+                alert("Quiz hoàn thành!");
+            }
+        }
+    </script>
+</body>
+</html>
